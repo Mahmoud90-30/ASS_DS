@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <vector>
 #include <cctype>
 using namespace std;
 
@@ -50,58 +51,114 @@ public:
     }
 };
 
+class Solution {
+public:
+    vector<int> nextGreaterElements(vector<int>& nums) {
+        int n = nums.size();
+        vector<int> res(n, -1);
 
-int evaluate(string s) {
+        Stack st; 
+
+        for (int i = 2 * n - 1; i >= 0; i--) {
+
+            int idx = i % n;
+
+            while (!st.empty() && nums[st.peek()] <= nums[idx]) {
+                st.pop();
+            }
+
+            if (i < n) {
+                if (!st.empty()) {
+                    res[idx] = nums[st.peek()];
+                }
+            }
+
+            st.push(idx);
+        }
+
+        return res;
+    }
+};
+
+class ExpressionEvaluator {
+private:
     Stack st;
+    int result;
+    int sign;
+    int num;
 
-    int result = 0;
-    int sign = 1;
-    int num = 0;
-
-    for (char c : s) {
-
-        if (isdigit(c)) {
-            num = num * 10 + (c - '0');
-        }
-
-        else if (c == '+') {
-            result += sign * num;
-            num = 0;
-            sign = 1;
-        }
-
-        else if (c == '-') {
-            result += sign * num;
-            num = 0;
-            sign = -1;
-        }
-
-        else if (c == '(') {
-            st.push(result);
-            st.push(sign);
-
-            result = 0;
-            sign = 1;
-        }
-
-        else if (c == ')') {
-            result += sign * num;
-            num = 0;
-
-            result *= st.pop();
-            result += st.pop(); 
-        }
+public:
+    ExpressionEvaluator() {
+        result = 0;
+        sign = 1;
+        num = 0;
     }
 
-    result += sign * num;
-    return result;
-}
+    int evaluate(string s) {
+
+        for (char c : s) {
+
+            if (isdigit(c)) {
+                num = num * 10 + (c - '0');
+            }
+
+            else if (c == '+') {
+                result += sign * num;
+                num = 0;
+                sign = 1;
+            }
+
+            else if (c == '-') {
+                result += sign * num;
+                num = 0;
+                sign = -1;
+            }
+
+            else if (c == '(') {
+                st.push(result);
+                st.push(sign);
+
+                result = 0;
+                sign = 1;
+            }
+
+            else if (c == ')') {
+                result += sign * num;
+                num = 0;
+
+                result *= st.pop(); 
+                result += st.pop(); 
+            }
+        }
+
+        result += sign * num;
+        return result;
+    }
+};
 
 int main() {
+// ========================================================Q1
 
-    string str;
-    getline(cin, str);
-    cout << evaluate(str) << endl;           
+    // ExpressionEvaluator Ex;
+    // string str;
+    // getline(cin, str);
+    // cout << Ex.evaluate(str) << endl;
+    
+    // ========================================================Q2
+    
+    // Solution sol;
 
+    // vector<int> nums1 = {1, 2, 1};
+    // vector<int> ans1 = sol.nextGreaterElements(nums1);
+
+    // for (int x : ans1) cout << x << " ";
+    // cout << endl;
+
+    // vector<int> nums2 = {1, 2, 3, 4, 3};
+    // vector<int> ans2 = sol.nextGreaterElements(nums2);
+
+    // for (int x : ans2) cout << x << " ";
+    // cout << endl;
+    
     return 0;
 }
