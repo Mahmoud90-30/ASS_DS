@@ -96,22 +96,35 @@ public:
 
     int evaluate(string s) {
 
+        bool expectNumber = true;
+
         for (char c : s) {
 
             if (isdigit(c)) {
                 num = num * 10 + (c - '0');
+                expectNumber = false;
             }
 
             else if (c == '+') {
-                result += sign * num;
-                num = 0;
-                sign = 1;
+                if (expectNumber) {
+                    sign = 1; 
+                } else {
+                    result += sign * num;
+                    num = 0;
+                    sign = 1;
+                    expectNumber = true;
+                }
             }
 
             else if (c == '-') {
-                result += sign * num;
-                num = 0;
-                sign = -1;
+                if (expectNumber) {
+                    sign *= -1; 
+                } else {
+                    result += sign * num;
+                    num = 0;
+                    sign = -1;
+                    expectNumber = true;
+                }
             }
 
             else if (c == '(') {
@@ -120,14 +133,17 @@ public:
 
                 result = 0;
                 sign = 1;
+                expectNumber = true;
             }
 
             else if (c == ')') {
                 result += sign * num;
                 num = 0;
 
-                result *= st.pop(); 
-                result += st.pop(); 
+                result *= st.pop();
+                result += st.pop();
+
+                expectNumber = false;
             }
         }
 
