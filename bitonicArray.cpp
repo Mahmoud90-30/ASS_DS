@@ -15,7 +15,6 @@ void bubbleSortAsc(int arr[], int start, int end) {
     }
 }
 
-
 void selectionSortDesc(int arr[], int start, int end) {
     for (int i = start; i <= end; i++) {
         int maxIdx = i;
@@ -43,9 +42,9 @@ int findMaxIndex(int arr[], int n) {
 
 void makeBitonic(int arr[], int n) {
 
-    int peak = findMaxIndex(arr, n);
+    int BITONIC_POINT = findMaxIndex(arr, n);
     int mid = n / 2;
-    swap(arr[peak], arr[mid]);
+    swap(arr[BITONIC_POINT], arr[mid]);
     swaps++;
 
     bubbleSortAsc(arr, 0, mid - 1);
@@ -77,7 +76,6 @@ void testCase(int arr[], int n, int target) {
     comparisons = 0;
     swaps = 0;
 
-    cout << "Original: ";
     printArray(arr, n);
 
     makeBitonic(arr, n);
@@ -116,7 +114,7 @@ int main() {
     cout << "\n--- Target not found ---\n";
     testCase(a4, 10, 4);
 
-    int a5[] = {3, 3, 7, 7, 2};
+    int a5[] = {3, 3, 2, 7, 7};
     cout << "\n--- Duplicates ---\n";
     testCase(a5, 5, 3);
 
