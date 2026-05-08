@@ -150,6 +150,74 @@ public:
         cout << "Book Author: " << root->data.author << endl;
         inorder(root->right);
     }
+
+    //==========================================================================
+    //Functional Fuotures 
+    //==========================================================================
+
+    void printInRange(Node* root, int minID, int maxID) 
+    {
+
+        if (root == NULL) return ;
+
+        if (root->data.id > minID)
+            printInRange(root->left, minID, maxID);
+
+        if (root->data.id >= minID && root->data.id <= maxID) {
+
+            cout << "Book Id: " << root->data.id << endl;
+            cout << "Book Title: " << root->data.title << endl;
+            cout << "Book Author: " << root->data.author << endl;
+            cout << "-------------------\n";
+        }
+
+       
+        if (root->data.id < maxID)
+            printInRange(root->right, minID, maxID);
+    }
+
+    void printInRange(int minID, int maxID) 
+    {
+
+    printInRange(root, minID, maxID);
+
+    }
+
+    //closest ID to target
+
+    int closestID(Node* root, int target) 
+    {
+        if(root == NULL) return ;
+
+    int closest = root->data.id;
+
+    while (root != NULL) {
+
+       
+        if (abs(root->data.id - target) < abs(closest - target)) {
+            closest = root->data.id;
+        }
+
+      
+        if (target < root->data.id)
+            root = root->left;
+
+        else if (target > root->data.id)
+            root = root->right;
+
+        else
+            return root->data.id; 
+    }
+
+    return closest;
+}
+
+    void closestID(int target) {
+        int result = closestID(root, target);
+        cout << "Closest ID to " << target << " is: " << result << endl;
+    }
+
+
 };
 
 int main(){
