@@ -232,4 +232,10 @@ int main(){
     cout << "===== Inorder Traversal (Sorted Books) =====\n";
     //tree.inorder(tree.root);
     tree.search(15);
+
+    cout << "===== Books with IDs between 4 and 15 =====\n";
+    tree.printInRange(4, 15);
+
+    cout << "===== Closest ID to 12 =====\n";
+    tree.closestID(12);
 }
