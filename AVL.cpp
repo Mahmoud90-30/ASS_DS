@@ -70,7 +70,7 @@ public:
             else{
                 Node *temp=findmin(node->right);
                 node->data=temp->data;
-                node->right=Delete(node->right,temp->data.id);
+                node->right=Delete(node->right,temp->data);
             }
         }
         return node;
@@ -217,7 +217,7 @@ public:
             else{
                 Node *temp=findmin(root->right);
                 root->data=temp->data;
-                root->right=Delete(root->right,temp->data.id);
+                root->right=Delete(root->right,temp->data);
             }
         }
         root->height = 1 + max(getHeight(root->left), getHeight(root->right));
@@ -229,7 +229,7 @@ public:
         if(balance<-1 && getBalance(root->right)<=0)
             return leftRotation(root);
         //left right
-        if(balance>1 && getBalance(root->right)==-1){
+        if(balance>1 && getBalance(root->left)==-1){
             root->left=leftRotation(root->left);
             return rightRotation(root);
         }
@@ -310,7 +310,7 @@ public:
 
     int closestID(Node* root, int target) 
     {
-        if(root == NULL) return ;
+        if(root == NULL) return 0;
 
     int closest = root->data.id;
 
