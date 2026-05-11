@@ -611,87 +611,50 @@ int main(){
     BST bst;
 
     // ==========================================================
-    // Random IDs Books
+    // Books Array (20 Books)
     // ==========================================================
 
-    Book b1(10, "C++ Basics", "Menna");
-    Book b2(20, "Data Structures", "Nada");
-    Book b3(5, "Algorithms", "Mahmoud");
-    Book b4(15, "OOP", "Mina");
-    Book b5(4, "CS", "Seif");
-    Book b6(3, "Networks", "Mai");
+    Book books[20] = {
 
-    // Extra Books
-    Book b7(25, "Database", "Ali");
-    Book b8(30, "AI", "Omar");
-    Book b9(12, "Math", "Sara");
-    Book b10(18, "Physics", "Ahmed");
-    Book b11(7, "Biology", "Nour");
-    Book b12(50, "Machine Learning", "Youssef");
-    Book b13(45, "Operating Systems", "Mona");
-    Book b14(60, "Cyber Security", "Karim");
-    Book b15(1, "Web Development", "Hana");
-    Book b16(8, "Discrete Math", "Adham");
-    Book b17(90, "Cloud Computing", "Laila");
-    Book b18(55, "Computer Vision", "Khaled");
-    Book b19(13, "Software Engineering", "Salma");
-    Book b20(33, "Compiler Design", "Mostafa");
-
-    // ==========================================================
-    // Insert In AVL
-    // ==========================================================
-
-    avl.insert(b1);
-    avl.insert(b2);
-    avl.insert(b3);
-    avl.insert(b4);
-    avl.insert(b5);
-    avl.insert(b6);
-    avl.insert(b7);
-    avl.insert(b8);
-    avl.insert(b9);
-    avl.insert(b10);
-    avl.insert(b11);
-    avl.insert(b12);
-    avl.insert(b13);
-    avl.insert(b14);
-    avl.insert(b15);
-    avl.insert(b16);
-    avl.insert(b17);
-    avl.insert(b18);
-    avl.insert(b19);
-    avl.insert(b20);
+        {10, "C++ Basics", "Menna"},
+        {20, "Data Structures", "Nada"},
+        {5, "Algorithms", "Mahmoud"},
+        {15, "OOP", "Mina"},
+        {4, "CS", "Seif"},
+        {3, "Networks", "Mai"},
+        {25, "Database", "Ali"},
+        {30, "AI", "Omar"},
+        {12, "Math", "Sara"},
+        {18, "Physics", "Ahmed"},
+        {7, "Biology", "Nour"},
+        {50, "Machine Learning", "Youssef"},
+        {45, "Operating Systems", "Mona"},
+        {60, "Cyber Security", "Karim"},
+        {1, "Web Development", "Hana"},
+        {8, "Discrete Math", "Adham"},
+        {90, "Cloud Computing", "Laila"},
+        {55, "Computer Vision", "Khaled"},
+        {13, "Software Engineering", "Salma"},
+        {33, "Compiler Design", "Mostafa"}
+    };
 
     // ==========================================================
-    // Insert In BST
+    // Insert Books In AVL And BST Using Loop
     // ==========================================================
 
-    bst.insert(b1);
-    bst.insert(b2);
-    bst.insert(b3);
-    bst.insert(b4);
-    bst.insert(b5);
-    bst.insert(b6);
-    bst.insert(b7);
-    bst.insert(b8);
-    bst.insert(b9);
-    bst.insert(b10);
-    bst.insert(b11);
-    bst.insert(b12);
-    bst.insert(b13);
-    bst.insert(b14);
-    bst.insert(b15);
-    bst.insert(b16);
-    bst.insert(b17);
-    bst.insert(b18);
-    bst.insert(b19);
-    bst.insert(b20);
+    for(int i = 0; i < 20; i++){
+
+        avl.insert(books[i]);
+
+        bst.insert(books[i]);
+    }
 
     // ==========================================================
     // AVL Traversal
     // ==========================================================
 
     cout << "===== AVL Inorder Traversal =====\n";
+
     avl.inorder(avl.root);
 
     // ==========================================================
@@ -699,17 +662,18 @@ int main(){
     // ==========================================================
 
     cout << "\n===== Search =====\n";
+
     avl.search(15);
 
-    // ==========================================================
-    // Delete
-    // ==========================================================
+    // // ==========================================================
+    // // Delete
+    // // ==========================================================
 
-    cout << "\n===== Delete Book =====\n";
+    // cout << "\n===== Delete Book =====\n";
 
-    avl.root = avl.Delete(avl.root, b5);
+    // avl.root = avl.Delete(avl.root, books[4]);
 
-    avl.inorder(avl.root);
+    // avl.inorder(avl.root);
 
     // ==========================================================
     // Print Books In Range
@@ -733,21 +697,11 @@ int main(){
 
     cout << "\n===== Random IDs Comparison =====\n";
 
-    cout << "BST Height: "
-         << bst.getHeight(bst.root)
-         << endl;
+    cout << "BST Height: "<< bst.getHeight(bst.root)<< endl;
+    cout << "AVL Height: "<< avl.getHeight(avl.root)<< endl;
 
-    cout << "AVL Height: "
-         << avl.getHeight(avl.root)
-         << endl;
-
-    cout << "BST Search Steps: "
-         << bst.searchSteps(bst.root, 50)
-         << endl;
-
-    cout << "AVL Search Steps: "
-         << avl.searchSteps(avl.root, 50)
-         << endl;
+    cout << "BST Search Steps: "<< bst.searchSteps(bst.root, 50)<< endl;
+    cout << "AVL Search Steps: "<< avl.searchSteps(avl.root, 50)<< endl;
 
     // ==========================================================
     // Sorted IDs Test
@@ -756,35 +710,46 @@ int main(){
     BST bst2;
     AVL avl2;
 
-    bst2.insert(Book(10,"A","A"));
-    bst2.insert(Book(20,"B","B"));
-    bst2.insert(Book(30,"C","C"));
-    bst2.insert(Book(40,"D","D"));
-    bst2.insert(Book(50,"E","E"));
+Book sortedBooks[20] = {
 
-    avl2.insert(Book(10,"A","A"));
-    avl2.insert(Book(20,"B","B"));
-    avl2.insert(Book(30,"C","C"));
-    avl2.insert(Book(40,"D","D"));
-    avl2.insert(Book(50,"E","E"));
+    {10, "A", "A"},
+    {20, "B", "B"},
+    {30, "C", "C"},
+    {40, "D", "D"},
+    {50, "E", "E"},
+    {60, "F", "F"},
+    {70, "G", "G"},
+    {80, "H", "H"},
+    {90, "I", "I"},
+    {100, "J", "J"},
+    {110, "K", "K"},
+    {120, "L", "L"},
+    {130, "M", "M"},
+    {140, "N", "N"},
+    {150, "O", "O"},
+    {160, "P", "P"},
+    {170, "Q", "Q"},
+    {180, "R", "R"},
+    {190, "S", "S"},
+    {200, "T", "T"}
+};
+
+for(int i = 0; i < 20; i++) {
+
+    bst2.insert(sortedBooks[i]);
+    avl2.insert(sortedBooks[i]);
+}
+
+    // ==========================================================
+    // Sorted IDs Comparison
+    // ==========================================================
 
     cout << "\n===== Sorted IDs Comparison =====\n";
 
-    cout << "BST Height: "
-         << bst2.getHeight(bst2.root)
-         << endl;
-
-    cout << "AVL Height: "
-         << avl2.getHeight(avl2.root)
-         << endl;
-
-    cout << "BST Search Steps: "
-         << bst2.searchSteps(bst2.root, 50)
-         << endl;
-
-    cout << "AVL Search Steps: "
-         << avl2.searchSteps(avl2.root, 50)
-         << endl;
+    cout << "BST Height: "<< bst2.getHeight(bst2.root)<< endl;
+    cout << "AVL Height: "<< avl2.getHeight(avl2.root)<< endl;
+    cout << "BST Search Steps: "<< bst2.searchSteps(bst2.root, 50)<< endl;
+    cout << "AVL Search Steps: "<< avl2.searchSteps(avl2.root, 50)<< endl;
 
     return 0;
 }
